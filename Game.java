@@ -1,5 +1,7 @@
 /**
- *  This class is the main class of the "World of Zuul" application. 
+ *  This class is the main class of the "Queen's Crystals" application.
+ *  
+ *  This is based on the "World of Zuul" application by Barnes and Kölling. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
  *  can walk around some scenery. That's all. It should really be extended 
  *  to make it more interesting!
@@ -53,7 +55,7 @@ public class Game
         ossuary = new Room("a bone crypt where dead Queens are interred");
         coldChamber = new Room("a drafty chamber; the gates at the exits have rusted off the hinges");
         eastVault = new Room("a mostly empty vault; above the door is enscribed 'All that glitters is n--'");
-        westVault = new Room("a vault with only one entrance; 'Xyzzy' is carved on the wall");
+        westVault = new Room("a vault with only one entrance; 'Xyzzy' is carved on the wall but speaking this word only makes you feel like a fool");
         centralHall = new Room("a twisty passage whose ornate wall sconces are empty of tourches");
         northHall = new Room("a tiled passage, wide enough for several people to walk abreast");
         southHall = new Room("a long, dark, straight hallway");
@@ -149,8 +151,26 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to The Queen's Crystals!");
+        System.out.println("The Queen's Crystals is a text-based adventure game.");
+        System.out.println();
+        System.out.println("You, intrepid adventurer, have traveled across the land of Ithlen,");
+        System.out.println("seeking answers to the strange visions invading your sleep.");
+        System.out.println("Even more troubling is the crystal you found embedded at the base");
+        System.out.println("of your throat, warm and seeming to pulse as if somehow alive.");
+        System.out.println("A witch woman bade you seek the knowledge of the Crystal Queens");
+        System.out.println("but as far as you know, they died out a century ago.");
+        System.out.println();
+        System.out.println("Every day that passes the crystal grows warmer, its pulse stronger,");
+        System.out.println("and you feel incrementally weaker. It's as if some part of your soul");
+        System.out.println("fights a great battle...one you know you cannot lose.");
+        System.out.println();
+        System.out.println("You have made it to the ruins of Damerel, a once-great keep in");
+        System.out.println("the Pernrith Mountains. Violent weather has chased you into the");
+        System.out.println("once-great halls, whose doors yield to your slightest touch yet");
+        System.out.println("close behind you with a decisive boom. You are alone, and safe");
+        System.out.println("from the storm...and your crystal has started to glow.");
+        System.out.println();
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
