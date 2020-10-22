@@ -16,7 +16,7 @@
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/21/2020
+ * @version 10/22/2020
  */
 
 public class Game 
