@@ -11,8 +11,10 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Catherine Oldfield
+ * For RVCC GDEV242 - Fall 2020
+ * from code written by Michael Kölling and David J. Barnes
+ * @version 10/21/2020
  */
 
 public class Game 
@@ -34,30 +36,93 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room entryHall, galleryOfGlass, hallOfKnowledge, hallOfQueens;
+        Room armory, chamberOfStairs, catacombOfDreaming, shrineToSong;
+        Room ossuary, coldChamber, eastVault, westVault, centralHall;
+        Room northHall, southHall, eastHall, westHall;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        entryHall = new Room("description");
+        galleryOfGlass = new Room("description");
+        hallOfKnowledge = new Room("description");
+        hallOfQueens = new Room("description");
+        armory = new Room("description");
+        chamberOfStairs = new Room("description");
+        catacombOfDreaming = new Room("description");
+        shrineToSong = new Room("description");
+        ossuary = new Room("description");
+        coldChamber = new Room("description");
+        eastVault = new Room("description");
+        westVault = new Room("description");
+        centralHall = new Room("description");
+        northHall = new Room("description");
+        southHall = new Room("description");
+        eastHall = new Room("description");
+        westHall = new Room("description");
         
-        // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        // initialize the room exits
+        entryHall.setExit("south", galleryOfGlass);
+        
+        galleryOfGlass.setExit("north", entryHall);
+        galleryOfGlass.setExit("south", hallOfQueens);
+        galleryOfGlass.setExit("west", hallOfKnowledge);
+        
+        hallOfKnowledge.setExit("east", galleryOfGlass);
+        hallOfKnowledge.setExit("west", westHall);
+        hallOfKnowledge.setExit("south", centralHall);
+        
+        hallOfQueens.setExit("north", galleryOfGlass);
+        hallOfQueens.setExit("west", centralHall);
+        hallOfQueens.setExit("south", southHall);
+        
+        armory.setExit("north", westHall);
+        armory.setExit("east", centralHall);
+        armory.setExit("south", southHall);
+        
+        chamberOfStairs.setExit("south", westHall);
+        chamberOfStairs.setExit("down", catacombOfDreaming);
+        
+        catacombOfDreaming.setExit("up", chamberOfStairs);
+        catacombOfDreaming.setExit("east", northHall);
+        catacombOfDreaming.setExit("south", ossuary);
+        
+        shrineToSong.setExit("south", eastHall);
+        shrineToSong.setExit("west", northHall);
+        
+        ossuary.setExit("north", northHall);
+        ossuary.setExit("south", eastVault);
+        ossuary.setExit("east", eastHall);
+        ossuary.setExit("west", catacombOfDreaming);
+        
+        coldChamber.setExit("north", eastHall);
+        coldChamber.setExit("west", eastVault);
+        
+        eastVault.setExit("north", ossuary);
+        eastVault.setExit("west", westVault);
+        eastVault.setExit("east", coldChamber);
+        
+        westVault.setExit("east", eastVault);
+        
+        centralHall.setExit("north", hallOfKnowledge);
+        centralHall.setExit("east", hallOfQueens);
+        centralHall.setExit("west", armory);
+        
+        northHall.setExit("west", catacombOfDreaming);
+        northHall.setExit("east", shrineToSong);
+        northHall.setExit("south", ossuary);
+        
+        southHall.setExit("east", hallOfQueens);
+        southHall.setExit("west", armory);
+        
+        eastHall.setExit("north", shrineToSong);
+        eastHall.setExit("south", coldChamber);
+        eastHall.setExit("west", ossuary);
+        
+        westHall.setExit("north", chamberOfStairs);
+        westHall.setExit("south", armory);
+        westHall.setExit("east", hallOfKnowledge);
 
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
+        currentRoom = entryHall;  // start game outside
     }
 
     /**
