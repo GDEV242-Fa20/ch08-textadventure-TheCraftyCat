@@ -22,7 +22,8 @@
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Room startRoom;
+    private Player thePlayer;
         
     /**
      * Create the game and initialise its internal map.
@@ -30,6 +31,7 @@ public class Game
     public Game() 
     {
         createRooms();
+        thePlayer = new Player("Name", startRoom);
         parser = new Parser();
     }
 
@@ -124,8 +126,12 @@ public class Game
         westHall.setExit("north", chamberOfStairs);
         westHall.setExit("south", armory);
         westHall.setExit("east", hallOfKnowledge);
-
-        currentRoom = entryHall;  // start game outside
+        
+        // add items to the rooms
+        Item anItem = new Item(2, "test item", "this item is a test");
+        galleryOfGlass.addItem(anItem);        
+        
+        startRoom = entryHall;  // start game in the entry hall
     }
     
     /**
@@ -174,7 +180,7 @@ public class Game
         System.out.println();
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(startRoom.getLongDescription());
     }
 
     /**
@@ -249,14 +255,14 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = thePlayer.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            thePlayer.setCurrentRoom(nextRoom);
+            System.out.println(thePlayer.getCurrentRoom().getLongDescription());
         }
     }
 
@@ -284,7 +290,7 @@ public class Game
     {
         System.out.println("You take a look at your surroundings.");
         // print the room description
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(thePlayer.getCurrentRoom().getLongDescription());
     }
     
     /**

@@ -76,7 +76,7 @@ public class Room
             for(Item currentItem : items)
             {
                 returnString += "\n" + "\t" + "- " +
-                    currentItem.getShortDesc();
+                    currentItem.getName();
             }
         }
         
