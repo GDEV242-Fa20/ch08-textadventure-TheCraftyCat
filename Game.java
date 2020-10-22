@@ -199,6 +199,14 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
+                
+            case LOOK:
+                look();
+                break;
+                
+            case SLEEP:
+                sleep();
+                break;
 
             case QUIT:
                 wantToQuit = quit(command);
@@ -216,8 +224,10 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("You are lost. You are alone. The crystal");
+        System.out.println("embedded in your skin pulses painfully.");
+        System.out.println("You close your eyes and take a deep breath.");
+        System.out.println("Then, you remember your goal.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
@@ -263,5 +273,32 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+    
+    /**
+     * Look around the current room.
+     * A description of the room is printed to the terminal window.
+     */
+    private void look()
+    {
+        System.out.println("You take a look at your surroundings.");
+        // print the room description
+        System.out.println(currentRoom.getLongDescription());
+    }
+    
+    /**
+     * The player sleeps.
+     * A message prints to the terminal window about the sleep period.
+     */
+    private void sleep()
+    {
+        System.out.println("You have been awake for some time now and");
+        System.out.println("you feel like you're fighting for every step.");
+        System.out.println("You drag yourself into what looks like a");
+        System.out.println("defensible corner and all but collapse into");
+        System.out.println("your bedroll.");
+        System.out.println();
+        System.out.println("You slept more soundly than you thought you");
+        System.out.println("would, and wake feeling refreshed.");
     }
 }
