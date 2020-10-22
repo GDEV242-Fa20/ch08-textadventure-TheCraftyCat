@@ -35,6 +35,7 @@ public class Game
 
     /**
      * Create all the rooms and link their exits together.
+     * Create items and place them in the rooms.
      */
     private void createRooms()
     {
@@ -126,7 +127,7 @@ public class Game
 
         currentRoom = entryHall;  // start game outside
     }
-
+    
     /**
      *  Main play routine.  Loops until end of play.
      */

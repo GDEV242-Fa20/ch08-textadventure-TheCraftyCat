@@ -16,16 +16,21 @@
  */
 public class Item
 {
-    private int weight;
-    private String description;
+    private int weight; // the weight of the item
+    private String shortDescription; // an item name or short description
+    private String longDescription; // a longer, more detailed description
 
     /**
      * Constructor for objects of class Item
+     * @param itemWeight The weight of the item
+     * @param shortDesc The item name or short description
+     * @param longDesc The longer, more detailed item description
      */
-    public Item(int itemWeight, String itemDesc)
+    public Item(int itemWeight, String shortDesc, String longDesc)
     {
         weight = itemWeight;
-        description = itemDesc;
+        shortDescription = shortDesc;
+        longDescription = longDesc;
     }
 
     /**
@@ -39,12 +44,22 @@ public class Item
     }
     
     /**
-     * This method returns the item's decription
+     * This method returns the item's short decription
      * 
-     * @return description The description of the item
+     * @return shortDescription The short description of the item
      */
-    public String getDescription()
+    public String getShortDesc()
     {
-        return description;
+        return shortDescription;
+    }
+    
+    /**
+     * This method returns the item's long decription
+     * 
+     * @return longDescription The long description of the item
+     */
+    public String getLongDesc()
+    {
+        return longDescription;
     }
 }
