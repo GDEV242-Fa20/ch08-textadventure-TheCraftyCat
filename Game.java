@@ -42,23 +42,23 @@ public class Game
         Room northHall, southHall, eastHall, westHall;
       
         // create the rooms
-        entryHall = new Room("description");
-        galleryOfGlass = new Room("description");
-        hallOfKnowledge = new Room("description");
-        hallOfQueens = new Room("description");
-        armory = new Room("description");
-        chamberOfStairs = new Room("description");
-        catacombOfDreaming = new Room("description");
-        shrineToSong = new Room("description");
-        ossuary = new Room("description");
-        coldChamber = new Room("description");
-        eastVault = new Room("description");
-        westVault = new Room("description");
-        centralHall = new Room("description");
-        northHall = new Room("description");
-        southHall = new Room("description");
-        eastHall = new Room("description");
-        westHall = new Room("description");
+        entryHall = new Room("a large, vacant entry hall");
+        galleryOfGlass = new Room("a gallery with many stained glass windows");
+        hallOfKnowledge = new Room("a long room with many shelves of decayed books");
+        hallOfQueens = new Room("a great hall filled with statues of the great Queens");
+        armory = new Room("an armory with old, forgotten weapons");
+        chamberOfStairs = new Room("a small chamber with carved stone steps leading down");
+        catacombOfDreaming = new Room("a large cavern filled with candelabras and fanciful carvings");
+        shrineToSong = new Room("a room whose crystal stalactites turn every breath into a vibrant song");
+        ossuary = new Room("a bone crypt where dead Queens are interred");
+        coldChamber = new Room("a drafty chamber; the gates at the exits have rusted off the hinges");
+        eastVault = new Room("a mostly empty vault; above the door is enscribed 'All that glitters is n--'");
+        westVault = new Room("a vault with only one entrance; 'Xyzzy' is carved on the wall");
+        centralHall = new Room("a twisty passage whose ornate wall sconces are empty of tourches");
+        northHall = new Room("a tiled passage, wide enough for several people to walk abreast");
+        southHall = new Room("a long, dark, straight hallway");
+        eastHall = new Room("a narrow hall where the stone is crumbling in spots");
+        westHall = new Room("a wide hallway with faded tapestries on the walls");
         
         // initialize the room exits
         entryHall.setExit("south", galleryOfGlass);
