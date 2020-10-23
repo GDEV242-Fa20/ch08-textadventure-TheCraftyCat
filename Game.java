@@ -221,6 +221,10 @@ public class Game
                 thePlayer.takeItem();
                 break;
                 
+            case INVENTORY:
+                thePlayer.printInventory();
+                break;
+                
             case SLEEP:
                 sleep();
                 break;

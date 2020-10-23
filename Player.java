@@ -64,7 +64,7 @@ public class Player
         while(it.hasNext())
         {
             Item checkItem = it.next();
-            if(checkItem.getName().equals(takenItem))
+            if(checkItem.getName().toLowerCase().equals(takenItem))
             {
                 // if the item exists in the room...
                 itemExists = true;
@@ -125,7 +125,7 @@ public class Player
         while(it.hasNext())
         {
             Item checkItem = it.next();
-            if(checkItem.getName().equals(droppedItem))
+            if(checkItem.getName().toLowerCase().equals(droppedItem))
             {
                 // if the item exists in inventory...
                 
@@ -181,5 +181,28 @@ public class Player
     public void setCurrentRoom(Room newRoom)
     {
         currentRoom = newRoom;
+    }
+    
+    /**
+     * Print a list of the items in the Player's inventory
+     * to the terminal window.
+     */
+    public void printInventory()
+    {
+        if(inventory.size() == 0)
+        {
+            System.out.println("Your inventory is empty.");
+        }
+        
+        else
+        {
+            System.out.println("Your inventory contains: ");
+            Iterator<Item> it = inventory.iterator();
+            while(it.hasNext())
+            {
+                Item currentItem = it.next();
+                System.out.println("\t" + "- " + currentItem.getName());
+            }
+        }
     }
 }
