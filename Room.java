@@ -118,5 +118,14 @@ public class Room
     {
         items.add(newItem);
     }
+    
+    /**
+     * Return the list of items in this room.
+     * @return items The ArrayList of items in this room.
+     */
+    public ArrayList<Item> getItems()
+    {
+        return items;
+    }
 }
 

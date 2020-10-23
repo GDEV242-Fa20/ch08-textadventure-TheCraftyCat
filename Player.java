@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  *  This class is the Player class of the "Queen's Crystals" application,
@@ -39,64 +41,117 @@ public class Player
 
     /**
      * The Player attempts to pick up an item and adds it to his inventory.
-     * The method first checks to see if the item's weight would put the
-     * Player over his carrying capacity.
-     *
-     * @param newItem The item the Player wishes to pick up
-     * @return true if the item is added to inventory, false otherwise
+     * If the item isn't in the room, a message prints to the terminal 
+     * window. If the item is in the room but is too heavy for the 
+     * Player to carry, a message prints to the terminal window and the
+     * item is not picked up.
      */
-    public boolean pickUpItem(Item newItem)
+    public void takeItem()
     {
-        boolean success;
+        boolean itemTaken = false;
+        boolean itemExists = false;
+        Item tempItem;
+        Iterator<Item> it = currentRoom.getItems().iterator();
         
-        // check the item weight against what the Player can carry
-        if((newItem.getWeight() + getCurrentCarry()) > carryCapacity)
-        {
-            // item is too heavy to pick up
-            System.out.println("The " + newItem.getName() + "is too " +
-                "heavy for you to pick up." + "\n" + "Maybe you " +
-                "should put something down first.");
-            success = false;
-        }
+        // ask the Player what item to pick up
+        Scanner reader = new Scanner(System.in);
+        System.out.println("What item do you want to pick up?");
+        System.out.print("> ");
+        // obtain and clean user input
+        String takenItem = reader.nextLine().trim().toLowerCase();
         
-        else
+        // check if the item is present in the room
+        while(it.hasNext())
         {
-            // item is added to inventory
-            System.out.println("You have added the " + newItem.getName() +
-                " to your inventory.");
-            inventory.add(newItem);
-            // update the current carryied weight
-            currentCarry = getCurrentCarry();
-            success = true;
-        }
+            Item checkItem = it.next();
+            if(checkItem.getName().equals(takenItem))
+            {
+                // if the item exists in the room...
+                itemExists = true;
+                // check the item weight against what the Player can carry
+                if((checkItem.getWeight() + getCurrentCarry()) > carryCapacity)
+                {
+                    // item is too heavy to pick up
+                    System.out.println("The " + checkItem.getName() + 
+                        " is too heavy for you to pick up." + "\n" + 
+                        "Maybe you should put something down first.");
+                }
                 
-        return success;
+                else    // the item is added to the Player's inventory
+                {
+                    // remove it from the room
+                    it.remove();
+                    // add it to Player inventory
+                    inventory.add(checkItem); 
+                    // update the current carried weight
+                    currentCarry = getCurrentCarry(); 
+                    // print the success message and update itemTaken
+                    System.out.println("You have picked up the " + 
+                        checkItem.getName() + " and added it to " +
+                        "your inventory.");
+                        itemTaken = true;
+                }    
+            }
+        }
+        
+        if(!itemTaken && !itemExists)
+        {
+            System.out.println("That item isn't in this room...");
+        }
     }
     
+    
     /**
-     * The Player drops an item, removing it from his inventory.
-     * @param discardedItem The item to remove from inventory
+     * The Player drops an item, removing it from his inventory and 
+     * printing a confirmation message to the terminal window.
+     * If the item isn't in the player's inventory, a message prints to
+     * the terminal window.
      */
     
-    public void dropItem(Item discardedItem)
+    public void dropItem()
     {
-        // copy the item reference into a local variable:
-        Item tempItem = discardedItem;
+        boolean itemDropped = false;
+        Item tempItem;
+        Iterator<Item> it = inventory.iterator();
         
-        // remove the item from Player inventory
-        inventory.remove(discardedItem);
+        // ask the Player what item to drop
+        Scanner reader = new Scanner(System.in);
+        System.out.println("What item do you want to drop?");
+        System.out.print("> ");
+        // obtain and clean user input
+        String droppedItem = reader.nextLine().trim().toLowerCase();
         
-        // update the current carryied weight
-        currentCarry = getCurrentCarry();
+        // check if the item is present in the player's inventory
+        while(it.hasNext())
+        {
+            Item checkItem = it.next();
+            if(checkItem.getName().equals(droppedItem))
+            {
+                // if the item exists in inventory...
+                
+                // remove it from Player inventory
+                it.remove();
+                // add it to Room inventory
+                currentRoom.addItem(checkItem); 
+                // update the current carried weight
+                currentCarry = getCurrentCarry(); 
+                // print the drop message and update itemDropped
+                System.out.println("You have dropped the " + 
+                    checkItem.getName());
+                itemDropped = true;
+            }
+        }
         
-        // add the item to the Room's item list
-        //currentRoom.addItem(tempItem);
+        if(!itemDropped)
+        {
+            System.out.println("That item isn't in your inventory...");
+        }
     }
     
     /**
      * Calculates the total weight of everything the Player currently 
      * has in his inventory
-     * @return
+     * @return returnValue The currently carried weight
      */
     public int getCurrentCarry()
     {

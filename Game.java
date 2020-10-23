@@ -129,7 +129,9 @@ public class Game
         
         // add items to the rooms
         Item anItem = new Item(2, "test item", "this item is a test");
-        galleryOfGlass.addItem(anItem);        
+        galleryOfGlass.addItem(anItem); 
+        anItem = new Item(200, "heavy", "an item that can't be taken");
+        galleryOfGlass.addItem(anItem);
         
         startRoom = entryHall;  // start game in the entry hall
     }
@@ -209,6 +211,14 @@ public class Game
                 
             case LOOK:
                 look();
+                break;
+            
+            case DROP:
+                thePlayer.dropItem();
+                break;
+            
+            case TAKE:
+                thePlayer.takeItem();
                 break;
                 
             case SLEEP:
