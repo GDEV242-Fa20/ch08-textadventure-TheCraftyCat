@@ -19,18 +19,21 @@ public class Item
     private int weight; // the weight of the item
     private String name; // an item name or short description
     private String description; // a longer, more detailed description
+    private boolean canPickUp; // an indicator if the item can be picked up
 
     /**
      * Constructor for objects of class Item
      * @param itemWeight The weight of the item
      * @param shortDesc The item name or short description
      * @param longDesc The longer, more detailed item description
+     * @param pickUp An indicator if the item can be picked up or not
      */
-    public Item(int itemWeight, String itemName, String itemDesc)
+    public Item(int itemWeight, String itemName, String itemDesc, boolean pickUp)
     {
         weight = itemWeight;
         name = itemName;
         description = itemDesc;
+        canPickUp = pickUp;
     }
 
     /**
@@ -46,7 +49,7 @@ public class Item
     /**
      * This method returns the item's name
      * 
-     * @return shortDescription The name of the item
+     * @return name The name of the item
      */
     public String getName()
     {
@@ -54,12 +57,21 @@ public class Item
     }
     
     /**
-     * This method returns the item's long decription
+     * This method returns the item's longer, more detailed decription
      * 
-     * @return longDescription The long description of the item
+     * @return description The long description of the item
      */
     public String getDesc()
     {
         return description;
+    }
+    
+    /**
+     * This method returns the item's ability to be picked up
+     * @return true if a Player could pick up the item, false otherwise
+     */
+    public boolean canBePickedUp()
+    {
+        return canPickUp;
     }
 }

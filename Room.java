@@ -53,7 +53,7 @@ public class Room
      * @return The short description of the room
      * (the one that was defined in the constructor).
      */
-    public String getShortDescription()
+    public String getName()
     {
         return name;
     }

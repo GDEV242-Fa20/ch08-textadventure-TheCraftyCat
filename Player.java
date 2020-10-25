@@ -68,8 +68,15 @@ public class Player
             {
                 // if the item exists in the room...
                 itemExists = true;
+                // can the item be picked up at all?
+                if(!checkItem.canBePickedUp())
+                {
+                    System.out.println("You cannot remove the " + 
+                        checkItem.getName() + " from this room!");
+                }
+                
                 // check the item weight against what the Player can carry
-                if((checkItem.getWeight() + getCurrentCarry()) > carryCapacity)
+                else if((checkItem.getWeight() + getCurrentCarry()) > carryCapacity)
                 {
                     // item is too heavy to pick up
                     System.out.println("The " + checkItem.getName() + 
@@ -201,7 +208,8 @@ public class Player
             while(it.hasNext())
             {
                 Item currentItem = it.next();
-                System.out.println("\t" + "- " + currentItem.getName());
+                System.out.println("\t" + "- " + currentItem.getName() +
+                    ": " + currentItem.getDesc());
             }
         }
     }
