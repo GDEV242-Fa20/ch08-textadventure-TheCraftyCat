@@ -22,19 +22,16 @@ public class NonPlayerChar
     private String name;        // the name of the character
     private String description; // a physical description of the character
     private boolean isMale;     // to indicate NPC gender for pronouns
-    private String intro;       // intro dialog for the character
     private ArrayList<String> hints;  // dialog strings the character can speak 
 
     /**
      * Constructor for objects of class NonPlayerChar
      */
-    public NonPlayerChar(String npcName, boolean npcGender, String npcDesc, 
-        String npcIntro)
+    public NonPlayerChar(String npcName, boolean npcGender, String npcDesc)
     {
         name = npcName;
         isMale = npcGender;
         description = npcDesc;
-        intro = npcIntro;
         hints = new ArrayList<String>();
         hints.add(name + " has nothing to say.");
     }
@@ -55,15 +52,6 @@ public class NonPlayerChar
     public String getDesc()
     {
         return description;
-    }
-    
-    /**
-     * Returns the string with the NPC's intro dialog
-     * @return intro The intro dialog
-     */
-    public String getIntro()
-    {
-        return intro;
     }
     
     /**

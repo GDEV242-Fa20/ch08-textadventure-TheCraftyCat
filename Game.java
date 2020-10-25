@@ -1,3 +1,4 @@
+
 /**
  *  This class is the main class of the "Queen's Crystals" application.
  *  
@@ -34,7 +35,6 @@ public class Game
     private Room startRoom;
     private Player thePlayer;
     private Room questItemRoom;     // a room to hold a special quest item
-    private Room npcRoom;           // a room to hold a special NonPlayerChar
         
     /**
      * Create the game and initialise its internal map.
@@ -65,9 +65,15 @@ public class Game
         
         roomText = "A long room with many shelves of decayed books; ";
         roomText += "a large fireplace dominates one wall.";
-        Room hallOfKnowledge = new Room("Hall of Knowledge", roomText);
+        NonPlayerChar newNPC = new NonPlayerChar("Damaclea", false,
+            "a mysteriously translucent figure, grey as the surrounding stone");
+        newNPC.addHint("the Song...can you hear it...?");
+        newNPC.addHint("the wand... why couldn't I use it...?");
+        newNPC.addHint("'ware the Queens' gaze...");
+        Room hallOfKnowledge = new Room("Hall of Knowledge", roomText, newNPC);
         
-        roomText = "A great hall filled with statues of the great Queens.";
+        roomText = "A great hall filled with statues of the great Queens, ";
+        roomText += "all looking to the east.";
         Room hallOfQueens = new Room("Hall of Queens", roomText);
         
         roomText = "An armory with old, forgotten weapons.";
@@ -238,86 +244,85 @@ public class Game
             "a dagger with a heavily jeweled hilt", true));
          shrineToSong.addItem(new Item(3, "incense", 
             "a cone of heavily aromatic sandalwood incense", true));
-    	shrineToSong.addItem(new Item(3, "incense burner", 
+        shrineToSong.addItem(new Item(3, "incense burner", 
             "a small brass incense burner", true));
     
-    	ossuary.addItem(new Item(10, "mask", "a heavy funeral mask", true));
-    	ossuary.addItem(new Item(6, "shroud", 
+        ossuary.addItem(new Item(10, "mask", "a heavy funeral mask", true));
+        ossuary.addItem(new Item(6, "shroud", 
             "a moth-eaten burial shroud", true));
-    	ossuary.addItem(new Item(2, "hinge", "a broken hinge", true));
+        ossuary.addItem(new Item(2, "hinge", "a broken hinge", true));
     
-    	coldChamber.addItem(new Item(4, "stick", 
+        coldChamber.addItem(new Item(4, "stick", 
             "a wooden stick, good for poking things", true));
-    	coldChamber.addItem(new Item(1, "button", 
+        coldChamber.addItem(new Item(1, "button", 
             "a shiny brass button", true));
     
-    	eastVault.addItem(new Item(10, "lead", "a lump of lead", true));
-    	eastVault.addItem(new Item(5, "lock", "a metal padlock", true));
-    	eastVault.addItem(new Item(1, "key", "a key for a padlock", true));
+        eastVault.addItem(new Item(10, "lead", "a lump of lead", true));
+        eastVault.addItem(new Item(5, "lock", "a metal padlock", true));
+        eastVault.addItem(new Item(1, "key", "a key for a padlock", true));
 
-    	westVault.addItem(new Item(3, "wand", 
+        westVault.addItem(new Item(3, "wand", 
             "a wand with 'Xyzzy' carved on the side...but speaking this word only makes you feel like a fool", true));
-	westVault.addItem(new Item(5, "brick", "a brick", true));
+        westVault.addItem(new Item(5, "brick", "a brick", true));
     
-    	centralHall.addItem(new Item(3, "torch", "an unlit torch", true));
-    	centralHall.addItem(new Item(1, "spoon", "a runcible spoon", true));
+        centralHall.addItem(new Item(3, "torch", "an unlit torch", true));
+        centralHall.addItem(new Item(1, "spoon", "a runcible spoon", true));
 
-    	westHall.addItem(new Item(10, "tapestry", 
+        westHall.addItem(new Item(10, "tapestry", 
             "an old tapestry that has fallen off the wall", true));
     
-	// add items that can't be picked up to the rooms
-    	hallOfKnowledge.addItem(new Item(200, "desk", "a sturdy desk", false));
-    	hallOfKnowledge.addItem(new Item(200, "rug", 
+        // add items that can't be picked up to the rooms
+        hallOfKnowledge.addItem(new Item(200, "desk", "a sturdy desk", false));
+        hallOfKnowledge.addItem(new Item(200, "rug", 
             "a surprisingly soft rug", false));
     
-    	hallOfQueens.addItem(new Item(200, "statue of Desarae", 
+        hallOfQueens.addItem(new Item(200, "statue of Desarae", 
             "a statue of Queen Desarae; the inscription at the base is worn off", false));
-    	hallOfQueens.addItem(new Item(200, "statue of Idani", 
+        hallOfQueens.addItem(new Item(200, "statue of Idani", 
             "a statue of Queen Idani; the inscription at the base says 'BELOVED'", false));
-    	hallOfQueens.addItem(new Item(200, "statue of Yelena", 
+        hallOfQueens.addItem(new Item(200, "statue of Yelena", 
             "a statue of Queen Yelena; the inscription at the base says 'STRENGTH'", false));
-    	hallOfQueens.addItem(new Item(200, "unknown statue", 
+        hallOfQueens.addItem(new Item(200, "unknown statue", 
             "a statue whose head has been broken off; the inscription at the base looks to have been deliberately chiseled away", false));
 
-    	armory.addItem(new Item(200, "anvil", "a really heavy anvil", false));
-    	armory.addItem(new Item(200, "grue statue", 
+        armory.addItem(new Item(200, "anvil", "a really heavy anvil", false));
+        armory.addItem(new Item(200, "grue statue", 
             "a carved statue of a grue", false));
     
-    	catacombOfDreaming.addItem(new Item(200, "crystal pillars", 
+        catacombOfDreaming.addItem(new Item(200, "crystal pillars", 
             "several large, heavy crystal pillars in various colors", false));
-    	catacombOfDreaming.addItem(new Item(200, "chandelier", 
+        catacombOfDreaming.addItem(new Item(200, "chandelier", 
             "an ornate crystal chandelier", false));
     
-	shrineToSong.addItem(new Item(200, "altar", 
+        shrineToSong.addItem(new Item(200, "altar", 
             "a carved marble altar", false));
-    	shrineToSong.addItem(new Item(200, "drum", 
+        shrineToSong.addItem(new Item(200, "drum", 
             "an ornate drum in a large stand", false));
         
-   	ossuary.addItem(new Item(200, "sarcophagus", 
+        ossuary.addItem(new Item(200, "sarcophagus", 
             "a sarcophagus resting on a stone slab", false));
-    	ossuary.addItem(new Item(200, "candle stands", 
+        ossuary.addItem(new Item(200, "candle stands", 
             "four large, squat stands made of bones, for holding pillar candles", false));
     
-    	coldChamber.addItem(new Item(200, "iron ring", 
+        coldChamber.addItem(new Item(200, "iron ring", 
             "a heavy iron ring, bolted to the floor", false));
     
-	eastVault.addItem(new Item(200, "barrel", 
+        eastVault.addItem(new Item(200, "barrel", 
             "a large barrel full of... nails?", false));
     
-    	westVault.addItem(new Item(200, "magic mirror", 
+        westVault.addItem(new Item(200, "magic mirror", 
             "a mirror in a large frame, with the word 'magic' scrawled across the glass (it is not actually magic)", false));
-    	westVault.addItem(new Item(200, "planks", 
+        westVault.addItem(new Item(200, "planks", 
             "a stack of large wooden planks", false));
     
-    	centralHall.addItem(new Item(200, "wall sconce", 
+        centralHall.addItem(new Item(200, "wall sconce", 
             "an iron sconce for holding a torch, bolted to the wall", false));
     
-    	eastHall.addItem(new Item(200, "brick pile", 
-    	    "a pile of bricks", false));
+        eastHall.addItem(new Item(200, "brick pile", 
+            "a pile of bricks", false));
     
-    	questItemRoom = armory;        // where the quest item will be placed
-    	npcRoom = hallOfKnowledge;     // where the NonPlayerChar will be placed
-    	startRoom = entryHall;         // start game in the Entry Hall
+        questItemRoom = armory;        // where the quest item will be placed
+        startRoom = entryHall;         // start game in the Entry Hall
     }
     
     /**
@@ -415,6 +420,10 @@ public class Game
                 
             case SLEEP:
                 sleep();
+                break;
+            
+            case TALK:
+                talk();
                 break;
 
             case QUIT:
@@ -547,17 +556,4 @@ public class Game
             "a mysterious crystal wand", true, thePlayer));
     }
     
-    /**
-     * Create the NonPlayerChar and place into its starting room.
-     */
-    private void createNPC()
-    {
-        NonPlayerChar newNPC = new NonPlayerChar("Damaclea", false,
-            "a mysteriously translucent figure, grey as the surrounding stone",
-            "INTRO");
-        newNPC.addHint("Hint");
-        newNPC.addHint("Hint");
-        newNPC.addHint("Hint");
-        npcRoom.setNPC(newNPC);
-    }
 }
