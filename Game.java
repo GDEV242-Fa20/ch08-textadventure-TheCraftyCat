@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *  This class is the main class of the "Queen's Crystals" application.
  *  
@@ -35,6 +38,7 @@ public class Game
     private Room startRoom;
     private Player thePlayer;
     private Room questItemRoom;     // a room to hold a special quest item
+    private ArrayList<String> dreams;
         
     /**
      * Create the game and initialise its internal map.
@@ -44,6 +48,7 @@ public class Game
         createRooms();
         thePlayer = new Player("Name", startRoom);
         createQuestItems();
+        createDreams();
         parser = new Parser();
     }
 
@@ -239,10 +244,10 @@ public class Game
         catacombOfDreaming.addItem(new Item(1, "string", 
             "what looks like a small ribbon is actually a bit of string", true));
 
-         shrineToSong.addItem(new Item(3, "flute", "a crystal flute", true));
-         shrineToSong.addItem(new Item(4, "dagger", 
+        shrineToSong.addItem(new Item(3, "flute", "a crystal flute", true));
+        shrineToSong.addItem(new Item(4, "dagger", 
             "a dagger with a heavily jeweled hilt", true));
-         shrineToSong.addItem(new Item(3, "incense", 
+        shrineToSong.addItem(new Item(3, "incense", 
             "a cone of heavily aromatic sandalwood incense", true));
         shrineToSong.addItem(new Item(3, "incense burner", 
             "a small brass incense burner", true));
@@ -520,14 +525,28 @@ public class Game
      */
     private void sleep()
     {
-        System.out.println("You have been awake for some time now and");
-        System.out.println("you feel like you're fighting for every step.");
-        System.out.println("You drag yourself into what looks like a");
-        System.out.println("defensible corner and all but collapse into");
-        System.out.println("your bedroll.");
-        System.out.println();
-        System.out.println("You slept more soundly than you thought you");
-        System.out.println("would, and wake feeling refreshed.");
+        Random randomizer = new Random();
+        int chance = randomizer.nextInt(4);
+        
+        System.out.println("You have been awake for some time now and" + 
+            "\n" + "you feel like you're fighting for every step." + 
+            "\n" + "You drag yourself into what looks like a" +
+            "\n" + "defensible corner and all but collapse into" +
+            "\n" + "your bedroll." + "\n");
+        
+        if(chance % 4 == 0)     // the player dreams
+        {
+            // print details of the dream to the terminal window:
+            chance = randomizer.nextInt(dreams.size());
+            System.out.println(dreams.get(chance));
+            System.out.println("\n" + "You wake feeling slightly unsettled.");
+        }
+        
+        else    // the player does not dream
+        {
+            System.out.println("You slept more soundly than you thought you" + 
+                "\n" + "would, and wake feeling refreshed.");
+        }
     }
     
     /**
@@ -556,4 +575,13 @@ public class Game
             "a mysterious crystal wand", true, thePlayer));
     }
     
+    /**
+     * Create and populate the dreams ArrayList.
+     */
+    private void createDreams()
+    {
+        dreams = new ArrayList<String>();
+        String text = "DREAM1";
+        dreams.add(text);
+    }
 }
