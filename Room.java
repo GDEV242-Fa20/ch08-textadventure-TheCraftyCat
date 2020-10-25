@@ -26,7 +26,7 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;       // stores exits of this room.
     private ArrayList<Item> items;             // stores the items in this room.
-    private ArrayList<NonPlayerChar> npcs;     //stores the npcs in this room.
+    private NonPlayerChar npc;                 // the npc (if any) in this room.
 
     /**
      * Create a room named "name". Initially, it has no exits.
@@ -42,26 +42,26 @@ public class Room
         description = roomDescription;
         exits = new HashMap<>();
         items = new ArrayList<Item>();
-        npcs = new ArrayList<NonPlayerChar>();
+        npc = null;
     }
     
-    // /**
-     // * Create a room named "name". Initially, it has no exits.
-     // * name" is something like "kitchen" or "court yard" and
-     // * "description" is a short description of the room.
-     // * This version of the room has a NonPlayerChar.
-     // * @param roomName The room's name.
-     // * @param roomDescription The room's description.
-     // * @param newNPC The NonPlayerChar present in this room.
-     // */
-    // public Room(String roomName, String roomDescription, NonPlayerChar newNPC) 
-    // {
-        // name = roomName;
-        // description = roomDescription;
-        // exits = new HashMap<>();
-        // items = new ArrayList<Item>();
-        // npc = newNPC;
-    // }
+    /**
+     * Create a room named "name". Initially, it has no exits.
+     * name" is something like "kitchen" or "court yard" and
+     * "description" is a short description of the room.
+     * This version of the room has a NonPlayerChar.
+     * @param roomName The room's name.
+     * @param roomDescription The room's description.
+     * @param newNPC The NonPlayerChar present in this room.
+     */
+    public Room(String roomName, String roomDescription, NonPlayerChar newNPC) 
+    {
+        name = roomName;
+        description = roomDescription;
+        exits = new HashMap<>();
+        items = new ArrayList<Item>();
+        npc = newNPC;
+    }
 
     /**
      * Define an exit from this room.
@@ -109,6 +109,16 @@ public class Room
             }
         }
         
+        if(npc == null) // if there is no NonPlayerChar in this room
+        {
+            returnString += "\n" + "You are alone in this room.";
+        }
+        
+        else // list the room's NonPlayerChar
+        {
+            returnString += "\n" + npc.getName() + " is in this room with you."; 
+        }
+        
         returnString += "\n" + getExitString();
         return returnString;
     }
@@ -142,18 +152,15 @@ public class Room
             }
         }
         
-        if(npcs.size() == 0) // if there is no NonPlayerChar in this room
+        if(npc == null) // if there is no NonPlayerChar in this room
         {
-            returnString += "You are alone in this room.";
+            returnString += "\n" + "You are alone in this room.";
         }
         
         else // list the room's NonPlayerChar
         {
-            for(NonPlayerChar currentNPC : npcs)
-            {
-                returnString += currentNPC.getName() + ", " +
-                    currentNPC.getDesc() + " is in this room with you."; 
-            }
+            returnString += "\n" + npc.getName() + ", a " +
+                    npc.getDesc() + " is in this room with you."; 
         }
         
         returnString += "\n" + getExitString();
@@ -208,10 +215,18 @@ public class Room
      * Set the NonPlayerChar for this room.
      * @param newNPC The NonPlayerChar for this room.
      */
-    public void addNPC(NonPlayerChar newNPC)
+    public void setNPC(NonPlayerChar newNPC)
     {
-        npcs.add(newNPC);
+        npc = newNPC;
     }
     
+    /**
+     * Return the NonPlayerChar in this room.
+     * @return npc The NonPlayerChar in this room.
+     */
+    public NonPlayerChar getNPC()
+    {
+        return npc;
+    }
 }
 

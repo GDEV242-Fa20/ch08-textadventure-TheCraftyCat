@@ -66,10 +66,10 @@ public class Game
         roomText = "A long room with many shelves of decayed books; ";
         roomText += "a large fireplace dominates one wall.";
         NonPlayerChar newNPC = new NonPlayerChar("Damaclea", false,
-            "a mysteriously translucent figure, grey as the surrounding stone");
+            "mysteriously translucent figure, grey as the surrounding stone");
         newNPC.addHint("the Song...can you hear it...?");
         newNPC.addHint("the wand... why couldn't I use it...?");
-        newNPC.addHint("'ware the Queens' gaze...");
+        newNPC.addHint("beware the Queens' gaze...");
         Room hallOfKnowledge = new Room("Hall of Knowledge", roomText, newNPC);
         
         roomText = "A great hall filled with statues of the great Queens, ";
