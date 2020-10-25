@@ -21,6 +21,15 @@
 
 public class Game 
 {
+    /**
+     * A main method to create a Game object and invoke its play method.
+     */
+    public static void main(String[] args)
+    {
+        Game game = new Game();
+        game.play();
+    }
+    
     private Parser parser;
     private Room startRoom;
     private Player thePlayer;
