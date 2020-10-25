@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class Room 
 {
+    private String name;
     private String description;
     private HashMap<String, Room> exits;      // stores exits of this room.
     private ArrayList<Item> items;      // stores the items in this room.
@@ -27,11 +28,13 @@ public class Room
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
-     * @param description The room's description.
+     * @param roomName The room's name.
+     * @param roomDescription The room's description.
      */
-    public Room(String description) 
+    public Room(String roomName, String roomDescription) 
     {
-        this.description = description;
+        name = roomName;
+        description = roomDescription;
         exits = new HashMap<>();
         items = new ArrayList<Item>();
     }
@@ -52,18 +55,20 @@ public class Room
      */
     public String getShortDescription()
     {
-        return description;
+        return name;
     }
 
     /**
      * Return a description of the room in the form:
      *     You are in the kitchen.
+     *     This room contains
+     *          - list of any items by name
      *     Exits: north west
      * @return A long description of this room
      */
     public String getLongDescription()
     {
-        String returnString = "You are in " + description + ".\n";
+        String returnString = "You are in the " + name + ".\n";
         
         if(items.size() == 0) // if there are no items in this room
         {
@@ -77,6 +82,39 @@ public class Room
             {
                 returnString += "\n" + "\t" + "- " +
                     currentItem.getName();
+            }
+        }
+        
+        returnString += "\n" + getExitString();
+        return returnString;
+    }
+    
+    /**
+     * Return a description of the room in the form:
+     *     You are in the kitchen.
+     *     This is a sentance containing more details about the kitchen.
+     *     This room contains
+     *          - list of any items: item details
+     *     Exits: north west
+     * @return A long description of this room
+     */
+    public String getDetailedDescription()
+    {
+        String returnString = "You are in the " + name + ".\n";
+        returnString += description + "\n";
+        
+        if(items.size() == 0) // if there are no items in this room
+        {
+            returnString += "There is nothing in this room.";
+        }
+        
+        else // list the room's items
+        {
+            returnString += "This room contains: ";
+            for(Item currentItem : items)
+            {
+                returnString += "\n" + "\t" + "- " +
+                    currentItem.getName() + ": " + currentItem.getDesc();
             }
         }
         

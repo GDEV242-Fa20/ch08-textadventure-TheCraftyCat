@@ -50,29 +50,70 @@ public class Game
      */
     private void createRooms()
     {
-        Room entryHall, galleryOfGlass, hallOfKnowledge, hallOfQueens;
-        Room armory, chamberOfStairs, catacombOfDreaming, shrineToSong;
-        Room ossuary, coldChamber, eastVault, westVault, centralHall;
-        Room northHall, southHall, eastHall, westHall;
-      
         // create the rooms
-        entryHall = new Room("a large, vacant entry hall");
-        galleryOfGlass = new Room("a gallery with many stained glass windows");
-        hallOfKnowledge = new Room("a long room with many shelves of decayed books");
-        hallOfQueens = new Room("a great hall filled with statues of the great Queens");
-        armory = new Room("an armory with old, forgotten weapons");
-        chamberOfStairs = new Room("a small chamber with carved stone steps leading down");
-        catacombOfDreaming = new Room("a large cavern filled with candelabras and fanciful carvings");
-        shrineToSong = new Room("a room whose crystal stalactites turn every breath into a vibrant song");
-        ossuary = new Room("a bone crypt where dead Queens are interred");
-        coldChamber = new Room("a drafty chamber; the gates at the exits have rusted off the hinges");
-        eastVault = new Room("a mostly empty vault; above the door is enscribed 'All that glitters is n--'");
-        westVault = new Room("a vault with only one entrance; 'Xyzzy' is carved on the wall but speaking this word only makes you feel like a fool");
-        centralHall = new Room("a twisty passage whose ornate wall sconces are empty of tourches");
-        northHall = new Room("a tiled passage, wide enough for several people to walk abreast");
-        southHall = new Room("a long, dark, straight hallway");
-        eastHall = new Room("a narrow hall where the stone is crumbling in spots");
-        westHall = new Room("a wide hallway with faded tapestries on the walls");
+        String roomText = new String(""); // to hold room descriptions
+        
+        roomText = "A large, vacant entry hall; you have barred the ";
+        roomText += "door against the weather.";
+        Room entryHall = new Room("Entry Hall", roomText);
+        
+        roomText = "A gallery with many stained glass windows.";
+        Room galleryOfGlass = new Room("Gallery of Glass", roomText);
+        
+        roomText = "A long room with many shelves of decayed books; ";
+        roomText += "a large fireplace dominates one wall.";
+        Room hallOfKnowledge = new Room("Hall of Knowledge", roomText);
+        
+        roomText = "A great hall filled with statues of the great Queens.";
+        Room hallOfQueens = new Room("Hall of Queens", roomText);
+        
+        roomText = "An armory with old, forgotten weapons.";
+        Room armory = new Room("Armory", roomText);
+        
+        roomText = "A small chamber with several carved stone ";
+        roomText += "staircases; the only intact one leads down.";
+        Room chamberOfStairs = new Room("Chamber of Stairs", roomText);
+        
+        roomText = "A large cavern filled with candelabras and fanciful ";
+        roomText += "carvings; your soul feels lighter just by being in ";
+        roomText += "this place.";
+        Room catacombOfDreaming = new Room("Catacomb of Dreaming", roomText);
+        
+        roomText = "A room whose crystal stalactites turn every breath ";
+        roomText += "into a vibrant song.";
+        Room shrineToSong = new Room("Shrine to the Song", roomText);
+        
+        roomText = "A bone crypt where dead Queens are interred; the ";
+        roomText += "place is solemn yet strangely comforting to you.";
+        Room ossuary = new Room("Ossuary", roomText);
+        
+        roomText = "A drafty chamber; the gates at the exits have ";
+        roomText += "rusted off the hinges.";
+        Room coldChamber = new Room("Cold Chamber", roomText);
+        
+        roomText = "A mostly empty vault; above the door is enscribed ";
+        roomText += "the words 'All that glitters is n--'.";
+        Room eastVault = new Room("East Vault", roomText);
+        
+        roomText = "A dimly-lit vault with only one entrance.";
+        Room westVault = new Room("West Vault", roomText);
+        
+        roomText = "A twisty passage whose ornate wall sconces are ";
+        roomText += "empty of tourches.";
+        Room centralHall = new Room("Central Hall", roomText);
+        
+        roomText = "A tiled passage, wide enough for several people ";
+        roomText += "to walk abreast";
+        Room northHall = new Room("North Hall", roomText);
+        
+        roomText = "A long, dark, straight hallway.";
+        Room southHall = new Room("South Hall", roomText);
+        
+        roomText = "A narrow hall where the stone is crumbling in spots.";
+        Room eastHall = new Room("East Hall", roomText);
+        
+        roomText = "A wide hallway with faded tapestries on the walls.";
+        Room westHall = new Room("West Hall", roomText);
         
         // initialize the room exits
         entryHall.setExit("south", galleryOfGlass);
@@ -387,13 +428,14 @@ public class Game
     
     /**
      * Look around the current room.
-     * A description of the room is printed to the terminal window.
+     * A detailed description of the room is printed to the
+     * terminal window.
      */
     private void look()
     {
         System.out.println("You take a look at your surroundings.");
         // print the room description
-        System.out.println(thePlayer.getCurrentRoom().getLongDescription());
+        System.out.println(thePlayer.getCurrentRoom().getDetailedDescription());
     }
     
     /**
