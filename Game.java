@@ -16,7 +16,7 @@
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/22/2020
+ * @version 10/24/2020
  */
 
 public class Game 
@@ -33,6 +33,7 @@ public class Game
     private Parser parser;
     private Room startRoom;
     private Player thePlayer;
+    private Room questItemRoom;
         
     /**
      * Create the game and initialise its internal map.
@@ -41,6 +42,7 @@ public class Game
     {
         createRooms();
         thePlayer = new Player("Name", startRoom);
+        createQuestItems();
         parser = new Parser();
     }
 
@@ -179,91 +181,139 @@ public class Game
         westHall.setExit("east", hallOfKnowledge);
         
         // add items that can be picked up to the rooms
-        galleryOfGlass.addItem(new Item(2, "glass", "a piece of green glass from a stained glass window", true));
-        galleryOfGlass.addItem(new Item(2, "necklace", "a necklace with a broken clasp", true));
+        galleryOfGlass.addItem(new Item(2, "glass", 
+            "a piece of green glass from a stained glass window", true));
+        galleryOfGlass.addItem(new Item(2, "necklace", 
+            "a necklace with a broken clasp", true));
 
-        hallOfKnowledge.addItem(new Item(2, "parchment", "scraps of parchment with burns near their edges", true));
-        hallOfKnowledge.addItem(new Item(10, "book", "a dusty old tome written in a language you don't recognize", true));
-        hallOfKnowledge.addItem(new Item(6, "journal", "what looks like a journal, badly water damaged", true));
-        hallOfKnowledge.addItem(new Item(5, "sketchbook", "a sketchbook with renderings of architectural features", true));
-        hallOfKnowledge.addItem(new Item(1, "quill", "a quill pen with a broken nib", true));
-        hallOfKnowledge.addItem(new Item(2, "ink", "a stoppered jar of deep blue ink", true));
+        hallOfKnowledge.addItem(new Item(2, "parchment", 
+            "scraps of parchment with burns near their edges", true));
+        hallOfKnowledge.addItem(new Item(10, "book", 
+            "a dusty old tome written in a language you don't recognize", true));
+        hallOfKnowledge.addItem(new Item(6, "journal", 
+            "what looks like a journal, badly water damaged", true));
+        hallOfKnowledge.addItem(new Item(5, "sketchbook", 
+            "a sketchbook with renderings of architectural features", true));
+        hallOfKnowledge.addItem(new Item(1, "quill", 
+            "a quill pen with a broken nib", true));
+        hallOfKnowledge.addItem(new Item(2, "ink", 
+            "a stoppered jar of deep blue ink", true));
     
-        hallOfQueens.addItem(new Item(15, "stone hand", "a stone hand that broke off a statue", true));
-        hallOfQueens.addItem(new Item(4, "cuff", "a tarnished silver cuff set with deep red stones", true));
-        hallOfQueens.addItem(new Item(2, "pebble", "a pretty pebble", true));
+        hallOfQueens.addItem(new Item(15, "stone hand", 
+            "a stone hand that broke off a statue", true));
+        hallOfQueens.addItem(new Item(4, "cuff", 
+            "a tarnished silver cuff set with deep red stones", true));
+        hallOfQueens.addItem(new Item(2, "pebble", 
+            "a pretty pebble", true));
     
-        armory.addItem(new Item(20, "shield", "a small shield, old, but still in good condition", true));
-        armory.addItem(new Item(10, "crystal sword", "a sword made entirely of crystal and much too fragile to use as a weapon", true));
+        armory.addItem(new Item(20, "shield", 
+            "a small shield, old, but still in good condition", true));
+        armory.addItem(new Item(10, "crystal sword", 
+            "a sword made entirely of crystal and much too fragile to use as a weapon", true));
         armory.addItem(new Item(8, "spear", "a plain spear", true));
-        armory.addItem(new Item(8, "broken sword", "a sword whose rusty blade looks like it will break the moment you touch it", true));
-        armory.addItem(new Item(10, "staff", "a sturdy wooden staff", true));
-        armory.addItem(new Item(5, "hammer", "the kind of hammer that would be used in a smithy", true));
+        armory.addItem(new Item(8, "broken sword", 
+            "a sword whose rusty blade looks like it will break the moment you touch it", true));
+        armory.addItem(new Item(10, "staff", 
+            "a sturdy wooden staff", true));
+        armory.addItem(new Item(5, "hammer", 
+            "the kind of hammer that would be used in a smithy", true));
     
-        chamberOfStairs.addItem(new Item(2, "rope", "a three-foot length of rope", true));
+        chamberOfStairs.addItem(new Item(2, "rope", 
+            "a three-foot length of rope", true));
     
-        catacombOfDreaming.addItem(new Item(1, "red ribbon", "a bit of red ribbon", true));
-        catacombOfDreaming.addItem(new Item(1, "blue ribbon", "a long piece of blue ribbon", true));
-        catacombOfDreaming.addItem(new Item(1, "green ribbon", "a torn, tattered green ribbon", true));
-        catacombOfDreaming.addItem(new Item(1, "purple ribbon", "a fancy purple ribbon with gold edges", true));
-        catacombOfDreaming.addItem(new Item(1, "string", "what looks like a small ribbon is actually a bit of string", true));
+        catacombOfDreaming.addItem(new Item(1, "red ribbon", 
+            "a bit of red ribbon", true));
+        catacombOfDreaming.addItem(new Item(1, "blue ribbon", 
+            "a long piece of blue ribbon", true));
+        catacombOfDreaming.addItem(new Item(1, "green ribbon", 
+            "a torn, tattered green ribbon", true));
+        catacombOfDreaming.addItem(new Item(1, "purple ribbon", 
+            "a fancy purple ribbon with gold edges", true));
+        catacombOfDreaming.addItem(new Item(1, "string", 
+            "what looks like a small ribbon is actually a bit of string", true));
 
     shrineToSong.addItem(new Item(3, "flute", "a crystal flute", true));
-    shrineToSong.addItem(new Item(4, "dagger", "a dagger with a heavily jeweled hilt", true));
-    shrineToSong.addItem(new Item(3, "incense", "a cone of heavily aromatic sandalwood incense", true));
-    shrineToSong.addItem(new Item(3, "incense burner", "a small brass incense burner", true));
+    shrineToSong.addItem(new Item(4, "dagger", 
+        "a dagger with a heavily jeweled hilt", true));
+    shrineToSong.addItem(new Item(3, "incense", 
+        "a cone of heavily aromatic sandalwood incense", true));
+    shrineToSong.addItem(new Item(3, "incense burner", 
+        "a small brass incense burner", true));
     
     ossuary.addItem(new Item(10, "mask", "a heavy funeral mask", true));
-    ossuary.addItem(new Item(6, "shroud", "a moth-eaten burial shroud", true));
+    ossuary.addItem(new Item(6, "shroud", 
+        "a moth-eaten burial shroud", true));
     ossuary.addItem(new Item(2, "hinge", "a broken hinge", true));
     
-    coldChamber.addItem(new Item(4, "stick", "a wooden stick, good for poking things", true));
-    coldChamber.addItem(new Item(1, "button", "a shiny brass button", true));
+    coldChamber.addItem(new Item(4, "stick", 
+        "a wooden stick, good for poking things", true));
+    coldChamber.addItem(new Item(1, "button", 
+        "a shiny brass button", true));
     
     eastVault.addItem(new Item(10, "lead", "a lump of lead", true));
     eastVault.addItem(new Item(5, "lock", "a metal padlock", true));
     eastVault.addItem(new Item(1, "key", "a key for a padlock", true));
 
-    westVault.addItem(new Item(3, "wand", "a wand with 'Xyzzy' carved on the side...but speaking this word only makes you feel like a fool", true));
+    westVault.addItem(new Item(3, "wand", 
+        "a wand with 'Xyzzy' carved on the side...but speaking this word only makes you feel like a fool", true));
     westVault.addItem(new Item(5, "brick", "a brick", true));
     
     centralHall.addItem(new Item(3, "torch", "an unlit torch", true));
     centralHall.addItem(new Item(1, "spoon", "a runcible spoon", true));
 
-    westHall.addItem(new Item(10, "tapestry", "an old tapestry that has fallen off the wall", true));
+    westHall.addItem(new Item(10, "tapestry", 
+        "an old tapestry that has fallen off the wall", true));
     
     // add items that can't be picked up to the rooms
     hallOfKnowledge.addItem(new Item(200, "desk", "a sturdy desk", false));
-    hallOfKnowledge.addItem(new Item(200, "rug", "a surprisingly soft rug", false));
+    hallOfKnowledge.addItem(new Item(200, "rug", 
+        "a surprisingly soft rug", false));
     
-    hallOfQueens.addItem(new Item(200, "statue of Desarae", "a statue of Queen Desarae; the inscription at the base is worn off", false));
-    hallOfQueens.addItem(new Item(200, "statue of Idani", "a statue of Queen Idani; the inscription at the base says 'BELOVED'", false));
-    hallOfQueens.addItem(new Item(200, "statue of Yelena", "a statue of Queen Yelena; the inscription at the base says 'STRENGTH'", false));
-    hallOfQueens.addItem(new Item(200, "unknown statue", "a statue whose head has been broken off; the inscription at the base looks to have been deliberately chiseled away", false));
+    hallOfQueens.addItem(new Item(200, "statue of Desarae", 
+        "a statue of Queen Desarae; the inscription at the base is worn off", false));
+    hallOfQueens.addItem(new Item(200, "statue of Idani", 
+        "a statue of Queen Idani; the inscription at the base says 'BELOVED'", false));
+    hallOfQueens.addItem(new Item(200, "statue of Yelena", 
+        "a statue of Queen Yelena; the inscription at the base says 'STRENGTH'", false));
+    hallOfQueens.addItem(new Item(200, "unknown statue", 
+        "a statue whose head has been broken off; the inscription at the base looks to have been deliberately chiseled away", false));
 
     armory.addItem(new Item(200, "anvil", "a really heavy anvil", false));
-    armory.addItem(new Item(200, "grue statue", "a carved statue of a grue", false));
+    armory.addItem(new Item(200, "grue statue", 
+        "a carved statue of a grue", false));
     
-    catacombOfDreaming.addItem(new Item(200, "crystal pillars", "several large, heavy crystal pillars in various colors", false));
-    catacombOfDreaming.addItem(new Item(200, "chandelier", "an ornate crystal chandelier", false));
+    catacombOfDreaming.addItem(new Item(200, "crystal pillars", 
+        "several large, heavy crystal pillars in various colors", false));
+    catacombOfDreaming.addItem(new Item(200, "chandelier", 
+        "an ornate crystal chandelier", false));
     
-    shrineToSong.addItem(new Item(200, "altar", "a carved marble altar", false));
-    shrineToSong.addItem(new Item(200, "drum", "an ornate drum in a large stand", false));
+    shrineToSong.addItem(new Item(200, "altar", 
+        "a carved marble altar", false));
+    shrineToSong.addItem(new Item(200, "drum", 
+        "an ornate drum in a large stand", false));
         
-    ossuary.addItem(new Item(200, "sarcophagus", "a sarcophagus resting on a stone slab", false));
-    ossuary.addItem(new Item(200, "candle stands", "four large, squat stands made of bones, for holding pillar candles", false));
+    ossuary.addItem(new Item(200, "sarcophagus", 
+        "a sarcophagus resting on a stone slab", false));
+    ossuary.addItem(new Item(200, "candle stands", 
+        "four large, squat stands made of bones, for holding pillar candles", false));
     
-    coldChamber.addItem(new Item(200, "iron ring", "a heavy iron ring, bolted to the floor", false));
+    coldChamber.addItem(new Item(200, "iron ring", 
+        "a heavy iron ring, bolted to the floor", false));
     
-    eastVault.addItem(new Item(200, "barrel", "a large barrel full of... nails?", false));
+    eastVault.addItem(new Item(200, "barrel", 
+        "a large barrel full of... nails?", false));
     
-    westVault.addItem(new Item(200, "magic mirror", "a mirror in a large frame, with the word 'magic' scrawled across the glass (it is not actually magic)", false));
-    westVault.addItem(new Item(200, "planks", "a stack of large wooden planks", false));
+    westVault.addItem(new Item(200, "magic mirror", 
+        "a mirror in a large frame, with the word 'magic' scrawled across the glass (it is not actually magic)", false));
+    westVault.addItem(new Item(200, "planks", 
+        "a stack of large wooden planks", false));
     
-    centralHall.addItem(new Item(200, "wall sconce", "an iron sconce for holding a torch, bolted to the wall", false));
+    centralHall.addItem(new Item(200, "wall sconce", 
+        "an iron sconce for holding a torch, bolted to the wall", false));
     
     eastHall.addItem(new Item(200, "brick pile", "a pile of bricks", false));
-        
+    
+    questItemRoom = armory; // where the quest item will be placed
     startRoom = entryHall;  // start game in the entry hall
     }
     
@@ -354,6 +404,10 @@ public class Game
                 
             case INVENTORY:
                 thePlayer.printInventory();
+                break;
+                
+            case USE:
+                thePlayer.useItem();
                 break;
                 
             case SLEEP:
@@ -462,5 +516,14 @@ public class Game
         System.out.println();
         System.out.println("You slept more soundly than you thought you");
         System.out.println("would, and wake feeling refreshed.");
+    }
+    
+    /**
+     * Create quest items and place them into starting rooms.
+     */
+    private void createQuestItems()
+    {
+        questItemRoom.addItem(new BeamerItem(5, "wand", 
+            "a mysterious crystal wand", true, thePlayer));
     }
 }

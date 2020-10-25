@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/22/2020
+ * @version 10/24/2020
  */
 public class Player
 {
@@ -211,6 +211,41 @@ public class Player
                 System.out.println("\t" + "- " + currentItem.getName() +
                     ": " + currentItem.getDesc());
             }
+        }
+    }
+    
+    /**
+     * Use an item from the Player's inventory
+     */
+    public void useItem()
+    {
+        boolean itemExists = false;
+        Item tempItem;
+        Iterator<Item> it = inventory.iterator();
+        
+        // ask the Player what item to use
+        Scanner reader = new Scanner(System.in);
+        System.out.println("What item do you want to use?");
+        System.out.print("> ");
+        // obtain and clean user input
+        String usedItem = reader.nextLine().trim().toLowerCase();
+        
+        // check if the item is present in the player's inventory
+        while(it.hasNext())
+        {
+            Item checkItem = it.next();
+            if(checkItem.getName().toLowerCase().equals(usedItem))
+            {
+                // if the item exists in inventory...
+                // invoke the method to use it
+                checkItem.useItem();
+                itemExists = true;
+            }
+        }
+        
+        if(!itemExists)
+        {
+            System.out.println("That item isn't in your inventory...");
         }
     }
 }

@@ -7,12 +7,13 @@
  *  to make it more interesting!
  * 
  *  An "Item" represents an item in the game. Items have descriptions and
- *  weights. Items are placed in Rooms.
+ *  weights. Items are placed in Rooms. Items can either be picked up or
+ *  not.
  * 
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/22/2020
+ * @version 10/24/2020
  */
 public class Item
 {
@@ -73,5 +74,15 @@ public class Item
     public boolean canBePickedUp()
     {
         return canPickUp;
+    }
+    
+    /**
+     * The Player calls this method when attempting to use the Item.
+     * A message about use prints to the terminal window.
+     */
+    public void useItem()
+    {
+        System.out.println("You attempt to use the " + name +
+            " but nothing happens.");
     }
 }

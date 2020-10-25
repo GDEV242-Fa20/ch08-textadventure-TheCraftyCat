@@ -4,17 +4,19 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 /**
- * Class Room - a room in an adventure game.
- *
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
- *
- * A "Room" represents one location in the scenery of the game.  It is 
- * connected to other rooms via exits.  For each existing exit, the room 
- * stores a reference to the neighboring room.
+ * This class is the Player class of the "Queen's Crystals" application,
+ *  which is based on the "World of Zuul" application by Barnes and Kölling. 
+ *  "World of Zuul" is a very simple, text based adventure game.  Users 
+ *  can walk around some scenery. That's all. It should really be extended 
+ *  to make it more interesting!
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ *  A "Room" represents a room in the game. Players can travel from
+ *  Room to Room. Rooms can also hold Items.
+ * 
+ * @author Catherine Oldfield
+ * For RVCC GDEV242 - Fall 2020
+ * from code written by Michael Kölling and David J. Barnes
+ * @version 10/24/2020
  */
 
 public class Room 
