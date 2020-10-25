@@ -4,19 +4,20 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 /**
- * This class is the Player class of the "Queen's Crystals" application,
+ *  This class is the Room class of the "Queen's Crystals" application,
  *  which is based on the "World of Zuul" application by Barnes and Kölling. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
  *  can walk around some scenery. That's all. It should really be extended 
  *  to make it more interesting!
  * 
  *  A "Room" represents a room in the game. Players can travel from
- *  Room to Room. Rooms can also hold Items.
+ *  Room to Room. Rooms can hold any number of Items, implemented as an
+ *  ArrayList. Rooms can hold one NonPlayerChar.
  * 
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/24/2020
+ * @version 10/25/2020
  */
 
 public class Room 
@@ -25,6 +26,7 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;      // stores exits of this room.
     private ArrayList<Item> items;      // stores the items in this room.
+    private NonPlayerChar npc;          // the npc in this room.
 
     /**
      * Create a room described "description". Initially, it has
@@ -39,6 +41,7 @@ public class Room
         description = roomDescription;
         exits = new HashMap<>();
         items = new ArrayList<Item>();
+        npc = null;
     }
 
     /**
@@ -52,8 +55,8 @@ public class Room
     }
 
     /**
-     * @return The short description of the room
-     * (the one that was defined in the constructor).
+     * Returns the name of the room
+     * @return name The name of the room
      */
     public String getName()
     {
@@ -166,6 +169,24 @@ public class Room
     public ArrayList<Item> getItems()
     {
         return items;
+    }
+    
+    /**
+     * Set the NonPlayerChar for this room.
+     * @param newNPC The NonPlayerChar for this room.
+     */
+    public void setNPC(NonPlayerChar newNPC)
+    {
+        npc = newNPC;
+    }
+    
+    /**
+     * Return the NonPlayerChar for this room.
+     * @return npc The NonPlayerChar in this room.
+     */
+    public NonPlayerChar getNPC()
+    {
+        return npc;
     }
 }
 

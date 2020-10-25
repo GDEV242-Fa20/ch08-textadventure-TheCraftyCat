@@ -33,7 +33,8 @@ public class Game
     private Parser parser;
     private Room startRoom;
     private Player thePlayer;
-    private Room questItemRoom;
+    private Room questItemRoom;     // a room to hold a special quest item
+    private Room npcRoom;           // a room to hold a special NonPlayerChar
         
     /**
      * Create the game and initialise its internal map.
@@ -232,89 +233,91 @@ public class Game
         catacombOfDreaming.addItem(new Item(1, "string", 
             "what looks like a small ribbon is actually a bit of string", true));
 
-    shrineToSong.addItem(new Item(3, "flute", "a crystal flute", true));
-    shrineToSong.addItem(new Item(4, "dagger", 
-        "a dagger with a heavily jeweled hilt", true));
-    shrineToSong.addItem(new Item(3, "incense", 
-        "a cone of heavily aromatic sandalwood incense", true));
-    shrineToSong.addItem(new Item(3, "incense burner", 
-        "a small brass incense burner", true));
+         shrineToSong.addItem(new Item(3, "flute", "a crystal flute", true));
+         shrineToSong.addItem(new Item(4, "dagger", 
+            "a dagger with a heavily jeweled hilt", true));
+         shrineToSong.addItem(new Item(3, "incense", 
+            "a cone of heavily aromatic sandalwood incense", true));
+    	shrineToSong.addItem(new Item(3, "incense burner", 
+            "a small brass incense burner", true));
     
-    ossuary.addItem(new Item(10, "mask", "a heavy funeral mask", true));
-    ossuary.addItem(new Item(6, "shroud", 
-        "a moth-eaten burial shroud", true));
-    ossuary.addItem(new Item(2, "hinge", "a broken hinge", true));
+    	ossuary.addItem(new Item(10, "mask", "a heavy funeral mask", true));
+    	ossuary.addItem(new Item(6, "shroud", 
+            "a moth-eaten burial shroud", true));
+    	ossuary.addItem(new Item(2, "hinge", "a broken hinge", true));
     
-    coldChamber.addItem(new Item(4, "stick", 
-        "a wooden stick, good for poking things", true));
-    coldChamber.addItem(new Item(1, "button", 
-        "a shiny brass button", true));
+    	coldChamber.addItem(new Item(4, "stick", 
+            "a wooden stick, good for poking things", true));
+    	coldChamber.addItem(new Item(1, "button", 
+            "a shiny brass button", true));
     
-    eastVault.addItem(new Item(10, "lead", "a lump of lead", true));
-    eastVault.addItem(new Item(5, "lock", "a metal padlock", true));
-    eastVault.addItem(new Item(1, "key", "a key for a padlock", true));
+    	eastVault.addItem(new Item(10, "lead", "a lump of lead", true));
+    	eastVault.addItem(new Item(5, "lock", "a metal padlock", true));
+    	eastVault.addItem(new Item(1, "key", "a key for a padlock", true));
 
-    westVault.addItem(new Item(3, "wand", 
-        "a wand with 'Xyzzy' carved on the side...but speaking this word only makes you feel like a fool", true));
-    westVault.addItem(new Item(5, "brick", "a brick", true));
+    	westVault.addItem(new Item(3, "wand", 
+            "a wand with 'Xyzzy' carved on the side...but speaking this word only makes you feel like a fool", true));
+	westVault.addItem(new Item(5, "brick", "a brick", true));
     
-    centralHall.addItem(new Item(3, "torch", "an unlit torch", true));
-    centralHall.addItem(new Item(1, "spoon", "a runcible spoon", true));
+    	centralHall.addItem(new Item(3, "torch", "an unlit torch", true));
+    	centralHall.addItem(new Item(1, "spoon", "a runcible spoon", true));
 
-    westHall.addItem(new Item(10, "tapestry", 
-        "an old tapestry that has fallen off the wall", true));
+    	westHall.addItem(new Item(10, "tapestry", 
+            "an old tapestry that has fallen off the wall", true));
     
-    // add items that can't be picked up to the rooms
-    hallOfKnowledge.addItem(new Item(200, "desk", "a sturdy desk", false));
-    hallOfKnowledge.addItem(new Item(200, "rug", 
-        "a surprisingly soft rug", false));
+	// add items that can't be picked up to the rooms
+    	hallOfKnowledge.addItem(new Item(200, "desk", "a sturdy desk", false));
+    	hallOfKnowledge.addItem(new Item(200, "rug", 
+            "a surprisingly soft rug", false));
     
-    hallOfQueens.addItem(new Item(200, "statue of Desarae", 
-        "a statue of Queen Desarae; the inscription at the base is worn off", false));
-    hallOfQueens.addItem(new Item(200, "statue of Idani", 
-        "a statue of Queen Idani; the inscription at the base says 'BELOVED'", false));
-    hallOfQueens.addItem(new Item(200, "statue of Yelena", 
-        "a statue of Queen Yelena; the inscription at the base says 'STRENGTH'", false));
-    hallOfQueens.addItem(new Item(200, "unknown statue", 
-        "a statue whose head has been broken off; the inscription at the base looks to have been deliberately chiseled away", false));
+    	hallOfQueens.addItem(new Item(200, "statue of Desarae", 
+            "a statue of Queen Desarae; the inscription at the base is worn off", false));
+    	hallOfQueens.addItem(new Item(200, "statue of Idani", 
+            "a statue of Queen Idani; the inscription at the base says 'BELOVED'", false));
+    	hallOfQueens.addItem(new Item(200, "statue of Yelena", 
+            "a statue of Queen Yelena; the inscription at the base says 'STRENGTH'", false));
+    	hallOfQueens.addItem(new Item(200, "unknown statue", 
+            "a statue whose head has been broken off; the inscription at the base looks to have been deliberately chiseled away", false));
 
-    armory.addItem(new Item(200, "anvil", "a really heavy anvil", false));
-    armory.addItem(new Item(200, "grue statue", 
-        "a carved statue of a grue", false));
+    	armory.addItem(new Item(200, "anvil", "a really heavy anvil", false));
+    	armory.addItem(new Item(200, "grue statue", 
+            "a carved statue of a grue", false));
     
-    catacombOfDreaming.addItem(new Item(200, "crystal pillars", 
-        "several large, heavy crystal pillars in various colors", false));
-    catacombOfDreaming.addItem(new Item(200, "chandelier", 
-        "an ornate crystal chandelier", false));
+    	catacombOfDreaming.addItem(new Item(200, "crystal pillars", 
+            "several large, heavy crystal pillars in various colors", false));
+    	catacombOfDreaming.addItem(new Item(200, "chandelier", 
+            "an ornate crystal chandelier", false));
     
-    shrineToSong.addItem(new Item(200, "altar", 
-        "a carved marble altar", false));
-    shrineToSong.addItem(new Item(200, "drum", 
-        "an ornate drum in a large stand", false));
+	shrineToSong.addItem(new Item(200, "altar", 
+            "a carved marble altar", false));
+    	shrineToSong.addItem(new Item(200, "drum", 
+            "an ornate drum in a large stand", false));
         
-    ossuary.addItem(new Item(200, "sarcophagus", 
-        "a sarcophagus resting on a stone slab", false));
-    ossuary.addItem(new Item(200, "candle stands", 
-        "four large, squat stands made of bones, for holding pillar candles", false));
+   	ossuary.addItem(new Item(200, "sarcophagus", 
+            "a sarcophagus resting on a stone slab", false));
+    	ossuary.addItem(new Item(200, "candle stands", 
+            "four large, squat stands made of bones, for holding pillar candles", false));
     
-    coldChamber.addItem(new Item(200, "iron ring", 
-        "a heavy iron ring, bolted to the floor", false));
+    	coldChamber.addItem(new Item(200, "iron ring", 
+            "a heavy iron ring, bolted to the floor", false));
     
-    eastVault.addItem(new Item(200, "barrel", 
-        "a large barrel full of... nails?", false));
+	eastVault.addItem(new Item(200, "barrel", 
+            "a large barrel full of... nails?", false));
     
-    westVault.addItem(new Item(200, "magic mirror", 
-        "a mirror in a large frame, with the word 'magic' scrawled across the glass (it is not actually magic)", false));
-    westVault.addItem(new Item(200, "planks", 
-        "a stack of large wooden planks", false));
+    	westVault.addItem(new Item(200, "magic mirror", 
+            "a mirror in a large frame, with the word 'magic' scrawled across the glass (it is not actually magic)", false));
+    	westVault.addItem(new Item(200, "planks", 
+            "a stack of large wooden planks", false));
     
-    centralHall.addItem(new Item(200, "wall sconce", 
-        "an iron sconce for holding a torch, bolted to the wall", false));
+    	centralHall.addItem(new Item(200, "wall sconce", 
+            "an iron sconce for holding a torch, bolted to the wall", false));
     
-    eastHall.addItem(new Item(200, "brick pile", "a pile of bricks", false));
+    	eastHall.addItem(new Item(200, "brick pile", 
+    	    "a pile of bricks", false));
     
-    questItemRoom = armory; // where the quest item will be placed
-    startRoom = entryHall;  // start game in the entry hall
+    	questItemRoom = armory;        // where the quest item will be placed
+    	npcRoom = hallOfKnowledge;     // where the NonPlayerChar will be placed
+    	startRoom = entryHall;         // start game in the Entry Hall
     }
     
     /**
@@ -519,11 +522,42 @@ public class Game
     }
     
     /**
-     * Create quest items and place them into starting rooms.
+     * The Player talks to a NonPlayerChar in the current room.
+     */
+    private void talk()
+    {
+        if(thePlayer.getCurrentRoom().getNPC() == null)
+        {
+            // if there is no NonPlayerChar in the room...
+            System.out.println("There is no one in this room to answer you.");
+        }
+        else
+        {
+            String hint = thePlayer.getCurrentRoom().getNPC().getHint();
+            System.out.println(hint);
+        }
+    }
+    
+    /**
+     * Create quest item and place into its starting room.
      */
     private void createQuestItems()
     {
         questItemRoom.addItem(new BeamerItem(5, "wand", 
             "a mysterious crystal wand", true, thePlayer));
+    }
+    
+    /**
+     * Create the NonPlayerChar and place into its starting room.
+     */
+    private void createNPC()
+    {
+        NonPlayerChar newNPC = new NonPlayerChar("Damaclea", false,
+            "a mysteriously translucent figure, grey as the surrounding stone",
+            "INTRO");
+        newNPC.addHint("Hint");
+        newNPC.addHint("Hint");
+        newNPC.addHint("Hint");
+        npcRoom.setNPC(newNPC);
     }
 }
