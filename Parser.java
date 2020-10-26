@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 /**
- * This class is part of the "World of Zuul" application. 
+ * This class is the Room class of the "Queen's Crystals" application,
+ * which is based on the "World of Zuul" application by Barnes and Kölling. 
  * "World of Zuul" is a very simple, text based adventure game.  
  * 
  * This parser reads user input and tries to interpret it as an "Adventure"
@@ -13,8 +14,12 @@ import java.util.Scanner;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * This parser was edited to remove case-sensitivity of user input.
+ * 
+ * @author Catherine Oldfield
+ * For RVCC GDEV242 - Fall 2020
+ * from code written by Michael Kölling and David J. Barnes
+ * @version 10/25/2020
  */
 public class Parser 
 {
@@ -41,7 +46,7 @@ public class Parser
 
         System.out.print("> ");     // print prompt
 
-        inputLine = reader.nextLine().toLowerCase();
+        inputLine = reader.nextLine().toLowerCase(); //remove case sensitivity
 
         // Find up to two words on the line.
         Scanner tokenizer = new Scanner(inputLine);

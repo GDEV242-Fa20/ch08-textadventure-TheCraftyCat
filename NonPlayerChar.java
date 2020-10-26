@@ -37,8 +37,8 @@ public class NonPlayerChar
     }
 
     /**
-     * Returns the name of the NPC
-     * @return name The name of the NPC
+     * Returns the name of the NonPlayerChar
+     * @return name The name of the NonPlayerChar
      */
     public String getName()
     {
@@ -46,8 +46,8 @@ public class NonPlayerChar
     }
     
     /**
-     * Returns a description of the NPC
-     * @return description A description of the NPC
+     * Returns a description of the NonPlayerChar
+     * @return description A description of the NonPlayerChar
      */
     public String getDesc()
     {
@@ -55,7 +55,7 @@ public class NonPlayerChar
     }
     
     /**
-     * Add a String containing "hint" dialog to the character's list
+     * Add a String containing "hint" dialog to the NonPlayerChar's list
      * of "hints".
      * @param newHint The String to add.
      */
@@ -65,7 +65,7 @@ public class NonPlayerChar
     }
     
     /**
-     * Return a randomly chosen String from the character's list of "hints".
+     * Return a randomly chosen String from the NonPlayerChar's list of "hints".
      * @return 
      */
     public String getHint()

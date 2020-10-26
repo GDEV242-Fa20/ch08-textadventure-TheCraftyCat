@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *  This class is the main class of the "Queen's Crystals" application.
+ *  This class is the main class of the "Queen's Crystals" application. The
+ *  application has been extended to include more user actions, as well as
+ *  interactions with locations and non-player characters.
  *  
  *  This is based on the "World of Zuul" application by Barnes and Kölling. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -20,7 +22,7 @@ import java.util.Random;
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/24/2020
+ * @version 10/25/2020
  */
 
 public class Game 
@@ -56,7 +58,7 @@ public class Game
 
     /**
      * Create all the rooms and link their exits together.
-     * Create items and place them in the rooms.
+     * Create items and NPCs and place them in the rooms.
      */
     private void createRooms()
     {
@@ -391,7 +393,8 @@ public class Game
     }
 
     /**
-     * Print out the opening message for the player.
+     * Print out the opening message for the user. Additionally, ask the
+     * user for his or her character name and assign it to thePlayer object.
      */
     private void printWelcome()
     {
@@ -652,6 +655,12 @@ public class Game
         text += "\n" + "'Fool,' a harsh voice hisses at your ear; a moment";
         text += "\n" + "later you feel pain, as if claws had sunk into your";
         text += "\n" + "skin and are now painfully dragged out.";   
+        dreams.add(text);
+        
+        text = "You fall asleep the moment your eyes close. You dream";
+        text += "\n" + "deeply, your nocturnal voyages filled with rivers";
+        text += "\n" + "of chocolate and dancing purple kittens. Vaguely";
+        text += "\n" + "your dream self wonders what was in those trail rations.";
         dreams.add(text);
     }
 }

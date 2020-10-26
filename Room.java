@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * 
  *  A "Room" represents a room in the game. Players can travel from
  *  Room to Room. Rooms can hold any number of Items, implemented as an
- *  ArrayList. Rooms can contain NonPlayerChars, implemented as an ArrayList.
+ *  ArrayList. Rooms can optinally contain a single NonPlayerChar.
  * 
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
@@ -29,7 +29,7 @@ public class Room
     private NonPlayerChar npc;                 // the npc (if any) in this room.
 
     /**
-     * Create a room named "name". Initially, it has no exits.
+     * Create a Room named "name". Initially, it has no exits.
      * "name" is something like "kitchen" or "court yard" and
      * "description" is a short description of the room.
      * This version of the room has no NonPlayerChar.
@@ -46,7 +46,7 @@ public class Room
     }
     
     /**
-     * Create a room named "name". Initially, it has no exits.
+     * Create a Room named "name". Initially, it has no exits.
      * name" is something like "kitchen" or "court yard" and
      * "description" is a short description of the room.
      * This version of the room has a NonPlayerChar.

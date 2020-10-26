@@ -10,12 +10,12 @@ import java.util.Scanner;
  *  to make it more interesting!
  * 
  *  A "Player" represents a player character in the game. Players can
- *  travel from Room to Room and carry Items.
+ *  travel from Room to Room and carry Items. Players can also use Items.
  * 
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/24/2020
+ * @version 10/25/2020
  */
 public class Player
 {
@@ -224,7 +224,8 @@ public class Player
     }
     
     /**
-     * Use an item from the Player's inventory
+     * Use an item from the Player's inventory.
+     * A message prints to the terminal window about the item's use.
      */
     public void useItem()
     {

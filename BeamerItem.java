@@ -1,6 +1,6 @@
 
 /**
- * This class is the QuestItem class of the "Queen's Crystals" application,
+ *  This class is the BeamerItem class of the "Queen's Crystals" application,
  *  which is based on the "World of Zuul" application by Barnes and Kölling. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
  *  can walk around some scenery. That's all. It should really be extended 
@@ -14,7 +14,7 @@
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/24/2020
+ * @version 10/25/2020
  */
 public class BeamerItem extends Item
 {

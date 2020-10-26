@@ -8,12 +8,12 @@
  * 
  *  An "Item" represents an item in the game. Items have descriptions and
  *  weights. Items are placed in Rooms. Items can either be picked up or
- *  not.
+ *  not. Items can be used, though attempting to use them has no effect.
  * 
  * @author Catherine Oldfield
  * For RVCC GDEV242 - Fall 2020
  * from code written by Michael Kölling and David J. Barnes
- * @version 10/24/2020
+ * @version 10/25/2020
  */
 public class Item
 {
@@ -38,9 +38,9 @@ public class Item
     }
 
     /**
-     * This method returns the weight of the item
+     * This method returns the weight of the item.
      * 
-     * @return weight The weight of the item
+     * @return weight The weight of the item.
      */
     public int getWeight()
     {
@@ -48,9 +48,9 @@ public class Item
     }
     
     /**
-     * This method returns the item's name
+     * This method returns the item's name.
      * 
-     * @return name The name of the item
+     * @return name The name of the item.
      */
     public String getName()
     {
@@ -58,9 +58,9 @@ public class Item
     }
     
     /**
-     * This method returns the item's longer, more detailed decription
+     * This method returns the item's long, detailed decription.
      * 
-     * @return description The long description of the item
+     * @return description The long description of the item.
      */
     public String getDesc()
     {
@@ -68,8 +68,11 @@ public class Item
     }
     
     /**
-     * This method returns the item's ability to be picked up
-     * @return true if a Player could pick up the item, false otherwise
+     * This method returns the item's ability to be picked up.
+     * Items that cannot be picked up are considered a part of the room 
+     * scenery, while items that can be picked up will depend on the player's
+     * ability to carry their weight.
+     * @return true if a Player could pick up the item, false otherwise.
      */
     public boolean canBePickedUp()
     {
