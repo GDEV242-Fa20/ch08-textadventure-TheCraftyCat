@@ -5,29 +5,39 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public class TransporterRoom
+public class TransporterRoom extends Room
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
+    private RandomRoom randRoom;
+    
+    /**
+     * Create a TransporterRoom and initialize the 
+     */
+    public TransporterRoom(String roomName, String roomDescription, 
+        RandomRoom rooms)
+    {
+        super (roomName, roomDescription);
+        randRoom = rooms;
+    }
+    
     /**
      * Constructor for objects of class TransporterRoom
      */
-    public TransporterRoom()
+    public TransporterRoom(String roomName, String roomDescription, 
+        NonPlayerChar newNPC, RandomRoom rooms)
     {
-        // initialise instance variables
-        x = 0;
+        super (roomName, roomDescription, newNPC);
+        randRoom = rooms;
     }
 
     /**
-     * An example of a method - replace this comment with your own
+     * Return the room that is reached if we leave this room.
      *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * @param direction The direction of the exit (ignored).
+     * @return A randomly chosen exit.
      */
-    public int sampleMethod(int y)
+    public Room getExit(String direction)
     {
-        // put your code here
-        return x + y;
+        // direction of exit is ignored
+        return randRoom.getRandRoom();
     }
 }

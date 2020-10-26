@@ -191,6 +191,15 @@ public class Player
     }
     
     /**
+     * Set the Player name.
+     * @param newName The name to set.
+     */
+    public void setName(String newName)
+    {
+        name = newName;
+    }
+    
+    /**
      * Print a list of the items in the Player's inventory
      * to the terminal window.
      */

@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,16 +35,18 @@ public class Game
     }
     
     private Parser parser;
-    private Room startRoom;
-    private Player thePlayer;
+    private Room startRoom;     // the room in which the player starts
+    private Player thePlayer;   // the player
     private Room questItemRoom;     // a room to hold a special quest item
-    private ArrayList<String> dreams;
+    private ArrayList<String> dreams;   // a list of dreams the player can have
+    private RandomRoom roomList;    // a room randomizer
         
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        roomList = new RandomRoom();
         createRooms();
         thePlayer = new Player("Name", startRoom);
         createQuestItems();
@@ -121,13 +123,36 @@ public class Game
         Room northHall = new Room("North Hall", roomText);
         
         roomText = "A long, dark, straight hallway.";
-        Room southHall = new Room("South Hall", roomText);
+        Room darkHall = new Room("Dark Hall", roomText);
         
         roomText = "A narrow hall where the stone is crumbling in spots.";
         Room eastHall = new Room("East Hall", roomText);
         
         roomText = "A wide hallway with faded tapestries on the walls.";
         Room westHall = new Room("West Hall", roomText);
+        
+        roomText = "A hall where voices and noises echo strangely.";
+        Room southHall = new Room("South Hall", roomText);
+        
+        // add the rooms to the room randomizer:
+        roomList.addRoom(entryHall);
+        roomList.addRoom(galleryOfGlass);
+        roomList.addRoom(hallOfKnowledge);
+        roomList.addRoom(hallOfQueens);
+        roomList.addRoom(armory);
+        roomList.addRoom(chamberOfStairs);
+        roomList.addRoom(catacombOfDreaming);
+        roomList.addRoom(shrineToSong);
+        roomList.addRoom(ossuary);
+        roomList.addRoom(coldChamber);
+        roomList.addRoom(eastVault);
+        roomList.addRoom(westVault);
+        roomList.addRoom(centralHall);
+        roomList.addRoom(northHall);
+        roomList.addRoom(darkHall);
+        roomList.addRoom(eastHall);
+        roomList.addRoom(westHall);
+        roomList.addRoom(southHall);
         
         // initialize the room exits
         entryHall.setExit("south", galleryOfGlass);
@@ -143,11 +168,11 @@ public class Game
         
         hallOfQueens.setExit("north", galleryOfGlass);
         hallOfQueens.setExit("west", centralHall);
-        hallOfQueens.setExit("south", southHall);
+        hallOfQueens.setExit("south", darkHall);
         
         armory.setExit("north", westHall);
         armory.setExit("east", centralHall);
-        armory.setExit("south", southHall);
+        armory.setExit("south", darkHall);
         
         chamberOfStairs.setExit("south", westHall);
         chamberOfStairs.setExit("down", catacombOfDreaming);
@@ -165,11 +190,11 @@ public class Game
         ossuary.setExit("west", catacombOfDreaming);
         
         coldChamber.setExit("north", eastHall);
-        coldChamber.setExit("west", eastVault);
+        coldChamber.setExit("west", southHall);
         
         eastVault.setExit("north", ossuary);
         eastVault.setExit("west", westVault);
-        eastVault.setExit("east", coldChamber);
+        eastVault.setExit("east", southHall);
         
         westVault.setExit("east", eastVault);
         
@@ -181,8 +206,8 @@ public class Game
         northHall.setExit("east", shrineToSong);
         northHall.setExit("south", ossuary);
         
-        southHall.setExit("east", hallOfQueens);
-        southHall.setExit("west", armory);
+        darkHall.setExit("east", hallOfQueens);
+        darkHall.setExit("west", armory);
         
         eastHall.setExit("north", shrineToSong);
         eastHall.setExit("south", coldChamber);
@@ -191,6 +216,23 @@ public class Game
         westHall.setExit("north", chamberOfStairs);
         westHall.setExit("south", armory);
         westHall.setExit("east", hallOfKnowledge);
+        
+        southHall.setExit("west", eastVault);
+        southHall.setExit("east", coldChamber);
+        
+        // create the TransporterRoom and its NPC
+        roomText = "A small, dank, claustrophibic room where the air feels ";
+        roomText += "strange against your skin.";
+        newNPC = new NonPlayerChar("Frenic", true,
+            "skeletal ghost, hands clutched at the sides of its skull as if to pull its non-existent hair");
+        newNPC.addHint("BEGONE, FOOL!");
+        newNPC.addHint("not what you think, not what YOU think, not what you THINK!");
+        newNPC.addHint("you can't leave your way... no... no you can't");
+        TransporterRoom transporter = new TransporterRoom("Storage Cell",
+            roomText, newNPC, roomList);
+        // create the exits between transporter and southHall
+        transporter.setExit("south", southHall);
+        southHall.setExit("north", transporter);
         
         // add items that can be picked up to the rooms
         galleryOfGlass.addItem(new Item(2, "glass", 
@@ -353,30 +395,37 @@ public class Game
      */
     private void printWelcome()
     {
+        System.out.println("\n" + "Welcome to The Queen's Crystals!" + "\n" +
+            "The Queen's Crystals is a text-based adventure game." + "\n" +
+            "Please enter your name:" + "\n" + "> ");
+        // obtain user input and set it as the Player name
+        Scanner reader = new Scanner(System.in);
+        thePlayer.setName(reader.nextLine().trim());
+        
+        System.out.println("You, intrepid adventurer, have traveled across" + 
+            "the land of Ithlen," + "\n" + "seeking answers to the strange " +
+            "visions invading your sleep." + "\n" + "Even more troubling is" +
+            "the crystal you found embedded at the base" + "\n" + "of your " +
+            "throat, warm and seeming to pulse as if somehow alive." + "\n" + 
+            "A witch woman bade you seek the knowledge of the Crystal" + "\n" + 
+            "Queens" + "\n" + "but as far as you know, they died out " + "\n" + 
+            "more than a century ago.");
         System.out.println();
-        System.out.println("Welcome to The Queen's Crystals!");
-        System.out.println("The Queen's Crystals is a text-based adventure game.");
+        System.out.println("Every day that passes the crystal grows warmer, " + 
+            "its pulse stronger," + "\n" + "and you feel incrementally weaker. "+
+            "It's as if some part of your soul" + "\n" + "fights a great " + 
+            "battle...one you know you cannot lose.");
         System.out.println();
-        System.out.println("You, intrepid adventurer, have traveled across the land of Ithlen,");
-        System.out.println("seeking answers to the strange visions invading your sleep.");
-        System.out.println("Even more troubling is the crystal you found embedded at the base");
-        System.out.println("of your throat, warm and seeming to pulse as if somehow alive.");
-        System.out.println("A witch woman bade you seek the knowledge of the Crystal Queens");
-        System.out.println("but as far as you know, they died out a century ago.");
-        System.out.println();
-        System.out.println("Every day that passes the crystal grows warmer, its pulse stronger,");
-        System.out.println("and you feel incrementally weaker. It's as if some part of your soul");
-        System.out.println("fights a great battle...one you know you cannot lose.");
-        System.out.println();
-        System.out.println("You have made it to the ruins of Damerel, a once-great keep in");
-        System.out.println("the Pernrith Mountains. Violent weather has chased you into the");
-        System.out.println("once-great halls, whose doors yield to your slightest touch yet");
-        System.out.println("close behind you with a decisive boom. You are alone, and safe");
-        System.out.println("from the storm...and your crystal has started to glow.");
+        System.out.println("You have made it to the ruins of Damerel, a " +
+            "once-great keep in" + "\n" + "the Pernrith Mountains. Violent " +
+            "weather has chased you into the" + "\n" + "shadowy halls, whose " +
+            "doors yield to your slightest touch yet" + "\n" + "close behind " +
+            "you with a decisive boom. You are alone, and safe" + "\n" + 
+            "from the storm...and your crystal has started to glow.");
         System.out.println();
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(startRoom.getLongDescription());
+        System.out.println(startRoom.getDescription());
     }
 
     /**
@@ -438,19 +487,16 @@ public class Game
         return wantToQuit;
     }
 
-    // implementations of user commands:
-
     /**
      * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the 
-     * command words.
+     * Here we print a cryptic message and a list of the command words.
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. The crystal");
-        System.out.println("embedded in your skin pulses painfully.");
-        System.out.println("You close your eyes and take a deep breath.");
-        System.out.println("Then, you remember your goal.");
+        System.out.println("You are lost. You are alone. The crystal" + "\n" +
+            "embedded in your skin pulses painfully." + "\n" + "You close " +
+            "your eyes and take a deep breath." + "\n" + "Then, you remember " +
+            "your goal.");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
@@ -487,7 +533,7 @@ public class Game
                     "tumbling into the darkness.");
             }
             thePlayer.setCurrentRoom(nextRoom);
-            System.out.println(thePlayer.getCurrentRoom().getLongDescription());
+            System.out.println(thePlayer.getCurrentRoom().getDescription());
         }
     }
 
@@ -520,8 +566,8 @@ public class Game
     }
     
     /**
-     * The player sleeps.
-     * A message prints to the terminal window about the sleep period.
+     * The Player sleeps; there is a 25% chance that the Player will dream.
+     * A message prints to the terminal window about the sleep/dream period.
      */
     private void sleep()
     {
@@ -581,7 +627,31 @@ public class Game
     private void createDreams()
     {
         dreams = new ArrayList<String>();
-        String text = "DREAM1";
+        String text = "You close your eyes and swear, as you do, that you";
+        text += "\n" + "see a flash of light. It grows in strength, drawing";
+        text += "\n" + "you inexorably closer. You take a breath, feeling it";
+        text += "\n" + "catch in your chest; you can't breathe out, and no";
+        text += "\n" + "new air will enter your lungs. You try to fight down";
+        text += "\n" + "your panic, clawing at your own throat. Your nails";
+        text += "\n" + "scrape against the edge of the crystal embedded in";
+        text += "\n" + "your skin, and the shock of very real pain shocks you";
+        text += "\n" + "awake.";
+        dreams.add(text);
+        
+        text = "You close your eyes but sleep is slow to find you.";
+        text += "\n" + "When it does, it comes with tendrils of foggy shapes";
+        text += "\n" + "wrapping around you, the soft susurrus of indistinct";
+        text += "\n" + "voices at your ear. They whisper to you of power, of";
+        text += "\n" + "wisdom, of strength; they whisper to you sweet promises";
+        text += "\n" + "of their secrets. They wrap you in their warmth and";
+        text += "\n" + "sing to you, their songs wrapping close about you as";
+        text += "\n" + "do their shadowy arms. They encourage you to give";
+        text += "\n" + "yourself up to their care; your limbs feel heavy and";
+        text += "\n" + "your head tips back, breathing deeply of the heavy fog.";
+        text += "\n" + "It fills your lungs, heavy and thick.";
+        text += "\n" + "'Fool,' a harsh voice hisses at your ear; a moment";
+        text += "\n" + "later you feel pain, as if claws had sunk into your";
+        text += "\n" + "skin and are now painfully dragged out.";   
         dreams.add(text);
     }
 }

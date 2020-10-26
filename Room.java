@@ -30,7 +30,7 @@ public class Room
 
     /**
      * Create a room named "name". Initially, it has no exits.
-     * name" is something like "kitchen" or "court yard" and
+     * "name" is something like "kitchen" or "court yard" and
      * "description" is a short description of the room.
      * This version of the room has no NonPlayerChar.
      * @param roomName The room's name.
@@ -83,14 +83,12 @@ public class Room
     }
 
     /**
-     * Return a description of the room in the form:
-     *     You are in the kitchen.
-     *     This room contains
-     *          - list of any items by name
-     *     Exits: north west
-     * @return A long description of this room
+     * Return a description of the room, including its name and the names of
+     * any Items or NonPlayerChars that are in the room.
+     * Also list the room's exits.
+     * @return A description of this room
      */
-    public String getLongDescription()
+    public String getDescription()
     {
         String returnString = "You are in the " + name + ".\n";
         
@@ -124,13 +122,11 @@ public class Room
     }
     
     /**
-     * Return a description of the room in the form:
-     *     You are in the kitchen.
-     *     This is a sentance containing more details about the kitchen.
-     *     This room contains
-     *          - list of any items: item details
-     *     Exits: north west
-     * @return A long description of this room
+     * Return a description of the room, including its name and the names of
+     * any Items or NonPlayerChars that are in the room. If there are any 
+     * Items or NonPlayerChars, list their descriptions as well. 
+     * Also list the room's exits.
+     * @return A detailed description of this room
      */
     public String getDetailedDescription()
     {
