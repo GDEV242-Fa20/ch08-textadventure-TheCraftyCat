@@ -9,6 +9,10 @@ import java.util.HashMap;
  *
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
+ * 
+ * This class is incorporated into the "Queens Crystals" application by 
+ * Catherine Oldfield for RVCC GDEV242 (Fall 2020). No changes have been made
+ * to this class from the original authors' version.
  */
 
 public class CommandWords

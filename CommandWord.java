@@ -4,12 +4,18 @@
  * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
+ * 
+ * This class is incorporated into the "Queens Crystals" application by 
+ * Catherine Oldfield for RVCC GDEV242 (Fall 2020). The only changes made to the
+ * authors' original version are to add additional command words.
  */
 public enum CommandWord
 {
     // A value for each command word along with its
     // corresponding user interface string.
-    GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?");
+    GO("go"), QUIT("quit"), LOOK("look"), SLEEP("sleep"), DROP("drop"),
+    TAKE("take"), INVENTORY("inventory"), USE("use"), TALK("talk"),
+    HELP("help"), UNKNOWN("?");
     
     // The command string.
     private String commandString;
